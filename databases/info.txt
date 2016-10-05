@@ -1,0 +1,1 @@
+sequelize-auto -o "./models" -d "heroku_e8600f095545d53" -h "eu-cdbr-west-01.cleardb.com" -u "b8c415928187da" -p 3306 -x "35252737" -e mysql
