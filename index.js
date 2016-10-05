@@ -17,6 +17,10 @@ var DEFAULT_PORT = 3000
 /* [DELETE] Routes */
 // require('./routes/deleteRoutes')(api);
 
+// Keep Hello World route for codeship
+api.get('/', function(req, res, next) {
+	return res.status(200).send('Hello World !')
+})
 
 
 var port = process.env.PORT || DEFAULT_PORT
