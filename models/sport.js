@@ -1,18 +1,22 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('test', {
-    id: {
+  return sequelize.define('sport', {
+    idSPORT: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    test: {
+    name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
-    tableName: 'test'
+    tableName: 'sport'
   });
 };
