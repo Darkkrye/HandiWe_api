@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === "test") {
 }
 
 /* Déclaration Models */
+var Accept = sequelize.import("../models/accept")
 var Availability = sequelize.import("../models/availability")
 var Conversation = sequelize.import("../models/conversation")
 var Correspond = sequelize.import("../models/correspond")
