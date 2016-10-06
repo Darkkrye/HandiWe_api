@@ -42,12 +42,11 @@ var User = sequelize.import("../models/user")
 
 module.exports = function(api){
     api.get('/hello', function(req, res, next) {
-        Test.findAll().then(function(testes) {
-            var test = testes[0]
-
-            return res.status(200).send(test.test)
-        })
-    	return res.status(404)
+        if (process.env.NODE_ENV === "test") {
+            return res.status(200).send("Hello World")
+        } else {
+            return res.status(200).send("Hello, World !")
+        }
     })
 
     api.get('/users', function(req, res, next) {
