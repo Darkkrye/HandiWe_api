@@ -276,4 +276,33 @@ module.exports = function(api){
             }
         })
     })
+
+    // HAS_HOURS
+    api.get("/hours/from/:idAvailability", function(req, res, next) {
+        HAS_HOURS.findAll({
+            where: {
+                idAVAILABILITY: req.params.idAvailability
+            }
+        }).then(function(has_hours) {
+            if (has_hours != undefined && has_hours.length > 0) {
+                return res.status(200).send(has_hours)
+            } else {
+                return res.status(404).send("No hours found for this Availability")
+            }
+        })
+    })
+
+    api.get("/hours/:idHour", function(req, res, next) {
+        Hour.findAll({
+            where: {
+                idHOUR: req.params.idHour
+            }
+        }).then(function(hour) {
+            if (hour != undefined) {
+                return res.status(200).send(hour)
+            } else {
+                return res.status(404).send("No Hour found for this ID")
+            }
+        })
+    })
 }
