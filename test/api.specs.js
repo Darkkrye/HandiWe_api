@@ -13,10 +13,10 @@ describe('Hello World', function() {
             .expect("Hello World")
     })
 
-    it('should fail to return Hello World', function() {
+    /*it('should fail to return Hello World', function() {
         return request(api)
             .get('/hello')
             .send()
             .expect("Hello, World !")
-    })
+    })*/
 })
