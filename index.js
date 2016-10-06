@@ -9,7 +9,7 @@ api.use(bodyparser.urlencoded({ extended: true })); // support encoded bodies
 var DEFAULT_PORT = 3000
 
 /* [GET] Routes */
-// require('./routes/getRoutes')(api);
+require('./routes/getRoutes')(api);
 /* [POST] Routes */
 // require('./routes/postRoutes')(api);
 /* [PUT] Routes */
