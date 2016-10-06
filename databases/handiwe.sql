@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS User (
   zipCode char(5),
   city varchar(45),
   mail varchar(45) NOT NULL,
-  password varchar(45) NOT NULL,
+  pass_word varchar(45) NOT NULL,
   telephone char(14),
   isProtected boolean,
   image varchar(500),
@@ -127,9 +127,10 @@ CREATE TABLE IF NOT EXISTS Licence (
 CREATE TABLE IF NOT EXISTS Message (
   idMESSAGE int(11) NOT NULL AUTO_INCREMENT,
   message text NOT NULL,
-  sendDate date NOT NULL,
+  sendDate datetime NOT NULL,
   idCONVERSATIONUSERA int(11) NOT NULL,
   idCONVERSATIONUSERB int(11) NOT NULL,
+  FromCreator boolean NOT NULL,
 
   PRIMARY KEY (idMESSAGE)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
@@ -233,6 +234,20 @@ CREATE TABLE IF NOT EXISTS ORGANIZE (
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
+
+
+--
+-- Table structure for table `ACCEPT`
+--
+
+CREATE TABLE IF NOT EXISTS ACCEPT (
+  idHANDICAP int(11) NOT NULL,
+  idPLACE int(11) NOT NULL,
+
+  PRIMARY KEY (idHANDICAP, idPLACE)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- --------------------------------------------------------
@@ -268,6 +283,8 @@ ALTER TABLE CONVERSATION ADD CONSTRAINT fk_user_conversation FOREIGN KEY (idUSER
 
 ALTER TABLE Message ADD CONSTRAINT fk_conversation_message FOREIGN KEY (idCONVERSATIONUSERA, idCONVERSATIONUSERB) REFERENCES CONVERSATION(idUSERA, idUSERB);
 
+ALTER TABLE ACCEPT ADD CONSTRAINT fk_place_handicap FOREIGN KEY (idPLACE) REFERENCES Place(idPLACE);
+ALTER TABLE ACCEPT ADD CONSTRAINT fk_handicap_place FOREIGN KEY (idHANDICAP) REFERENCES Handicap(idHANDICAP);
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
@@ -322,7 +339,7 @@ INSERT INTO Cars (marque, modele, annee, wheelchairSeat, seat, ramp, image, city
 ("Citroën", "Berlingot", 2005, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/44082/bb118db0473f3d5ab807b526337e0f80253338f6.jpeg", "Cergy", "95", "Marc", 66),
 ("Fiat", "Scudo", 2009, 1, 6, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/93119/a1f660dd913f5a54c78d6f0c003f0153b84a5c56.jpeg", "Plaisir", "78", "Kita", 66),
 ("Volkswagen", "Transporter", 2010, 1, 5, "électrique", "https://www.wheeliz.com/media/cache/car__car_show__slide/10218/f4cc123fcaccd11d5c9d8da522d578e640eb63c9.jpeg", "Ballancourt-sur-Essone", "91", "Xavier", 66),
-("Renault", "Master", 2012, 3, 3, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/48508/ab5c3c6e1e25daa79bb7697cb5a5df40115f4929.png", "Ablis", "78", "Bel Air Automobile", 66)
+("Renault", "Master", 2012, 3, 3, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/48508/ab5c3c6e1e25daa79bb7697cb5a5df40115f4929.png", "Ablis", "78", "Bel Air Automobile", 66);
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
@@ -334,9 +351,9 @@ INSERT INTO Cars (marque, modele, annee, wheelchairSeat, seat, ramp, image, city
 -- Jeu d'essai
 --
 
-INSERT INTO User(firstName, lastName, birthdayDate, address, addressComplement1, addressComplement2, zipCode, city, mail, password, telephone, isProtected, image) VALUES
-("Pierre", "BOUDON", '1994-06-07', '101 Route de Dieppe', NULL, NULL, 27140, "Gisors", "pierre.boudon.27@gmail.com", "passwordPierre" '02.32.32.32.32', TRUE, "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/733784_10200903689818732_815511767_n.jpg?oh=8f5001c777e60d6637ec1363bfe2db85&oe=58A64F54"),
-("User", "TEST", '1980-01-10', '10 Rue de Test', NULL, NULL, 75001, "Paris", "test@test.fr", "passwordTest", '02.32.32.32.32', FALSE, "https://success.salesforce.com/resource/1470700800000/sharedlayout/img/new-user-image-default.png")
+INSERT INTO User (firstName, lastName, birthdayDate, address, addressComplement1, addressComplement2, zipCode, city, mail, pass_word, telephone, isProtected, image) VALUES
+("Pierre", "BOUDON", '1994-06-07', '101 Route de Dieppe', NULL, NULL, 27140, "Gisors", "pierre.boudon.27@gmail.com", "passwordPierre", '02.32.32.32.32', TRUE, "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/733784_10200903689818732_815511767_n.jpg?oh=8f5001c777e60d6637ec1363bfe2db85&oe=58A64F54"),
+("User", "TEST", '1980-01-10', '10 Rue de Test', NULL, NULL, 75001, "Paris", "test@test.fr", "passwordTest", '02.32.32.32.32', FALSE, "https://success.salesforce.com/resource/1470700800000/sharedlayout/img/new-user-image-default.png");
 
 INSERT INTO Place (name, mail, type, address, addressComplement1, addressComplement2, zipCode, city, telephone, accountantName, hasMaterial, hasFreeAccess) VALUES
 ("1ERE COMPAGNIE D'ARC DE LAGNY", "cie.arc.lagny@free.fr", "Section", "17 RUE CAVALLO PEDUZZI", "NULL", "NULL", 77400, "LAGNY SUR MARNE", "06 15 40 50 07", "DANIEL GRANDE", TRUE, NULL),
@@ -366,5 +383,62 @@ INSERT INTO Place (name, mail, type, address, addressComplement1, addressComplem
 ("VOILE DECOUVERTE HANDICAP", "vdh.assoc@gmail.com", "Club", "5 ALLEE DES MYOSOTIS", "NULL", "NULL", 93200, "ST DENIS", "06 70 54 09 00", "NULL", NULL, NULL);
 
 
+INSERT INTO Handicap (name, type) VALUES
+("Debout", "Handicap physique"),
+("Fauteuil Manuel", "Handicap physique"),
+("Fauteuil Electrique", "Handicap physique"),
+("Déficient auditif", "Handicap sensoriel"),
+("Déficient visuel", "Handicap sensoriel");
+
 INSERT INTO Sport (name, image) VALUES
-(, ),
+("Football", "http://static.dnaindia.com/sites/default/files/styles/half/public/2016/05/18/461609-426295-football-image.jpg"),
+("Basket-ball", "http://fr.ubergizmo.com/wp-content/uploads/2016/03/basketball.jpg"),
+("Tennis", "http://bayonne.cmcas.com/files/2015/09/P2-tennis.jpg"),
+("Golf", "http://cdn.sandals.com/sandals/portuguese/slideshows/golf/home/slide-01.jpg"),
+("Rugby", "http://cdn.londonandpartners.com/asset/1f8caef09915bd47b9a2d911c74caf48.jpg"),
+("Badminton", "http://www.aspc-badminton.com/images/Albums/article/voeux-2016.jpg"),
+("Tir à l'arc", "http://media.sit.savoie-mont-blanc.com/original/173420/0-228452.jpg"),
+("Gymnastique", "http://www.snut.fr/wp-content/uploads/2015/11/image-de-gymnastique-3.jpg"),
+("Echecs", "http://www.lemauricien.com/sites/default/files/imagecache/400xY/article/2012/08/11/echec_et_mat.jpg"),
+("Natation", "http://www.ja-drancy.com/wp-content/uploads/2015/04/choix-natation_0.jpg");
+
+INSERT INTO HAS_FAVORITE (idUSER, idFAVORITE) VALUES
+(4, 4),
+(4, 14),
+(14, 4),
+(14, 14);
+
+INSERT INTO CONVERSATION (idUSERA, idUSERB) VALUES
+(4, 14),
+(14, 4);
+
+INSERT INTO Message(message, sendDate, idCONVERSATIONUSERA, idCONVERSATIONUSERB, FromCreator) VALUES
+("Salut !", NOW(), 14, 4, TRUE),
+("Salut ! Comment tu vas ?", NOW(), 14, 4, FALSE),
+("Ça va bien je te remercie !", NOW(), 14, 4, TRUE),
+("Dis-moi ça t'intéresse de venir jouer au Basket Jeudi ?", NOW(), 14, 4, TRUE),
+("Oui, pourquoi pas !", NOW(), 14, 4, FALSE),
+("D'accord ! On se tient au courant !", NOW(), 14, 4, TRUE);
+
+
+INSERT INTO Hour (beginningHour, endHour) VALUES
+(12, 14),
+(18, 20);
+
+INSERT INTO Availability (jour) VALUES
+('Mercredi'),
+('Vendredi'),
+('Samedi');
+
+INSERT INTO HAS_HOURS (idHOUR, idAVAILABILITY) VALUES
+(4, 4),
+(14, 4),
+(4, 14),
+(14, 14),
+(4, 24),
+(14, 24);
+
+INSERT INTO ORGANIZE (idUSER, idSPORT, idAVAILABILITY, zipCode) VALUES
+(14, 4, 4, 75001),
+(14, 4, 14, 75001),
+(14, 4, 24, 75001);

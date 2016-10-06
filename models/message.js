@@ -18,19 +18,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     idCONVERSATIONUSERA: {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'conversation',
-        key: 'idUSERA'
-      }
+      allowNull: false
     },
     idCONVERSATIONUSERB: {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'conversation',
-        key: 'idUSERB'
-      }
+      allowNull: false
+    },
+    FromCreator: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     tableName: 'message'

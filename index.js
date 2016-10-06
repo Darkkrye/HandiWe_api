@@ -12,7 +12,7 @@ var DEFAULT_PORT = 3000
 require('./routes/getRoutes')(api);
 require('./routes/routesChallenge')(api);
 /* [POST] Routes */
-// require('./routes/postRoutes')(api);
+require('./routes/postRoutes')(api);
 /* [PUT] Routes */
 // require('./routes/putRoutes')(api);
 /* [DELETE] Routes */
