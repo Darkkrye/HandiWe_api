@@ -44,6 +44,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    pass_word: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     telephone: {
       type: DataTypes.CHAR(14),
       allowNull: true
