@@ -1,2 +1,2 @@
 web: node index.js
-test: npm test
+foreman run npm test
