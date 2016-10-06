@@ -41,42 +41,15 @@ var Organize = sequelize.import("../models/organize")
 var Place = sequelize.import("../models/place")
 var Sport = sequelize.import("../models/sport")
 var User = sequelize.import("../models/user")
+var Cars = sequelize.import("../models/cars")
 
 module.exports = function(api){
-    api.get('/hello', function(req, res, next) {
-        if (process.env.NODE_ENV === "test") {
-            return res.status(200).send("Hello World")
-        } else {
-            return res.status(200).send("Hello, World !")
-        }
-    })
-
-    api.get('/users', function(req, res, next) {
-        User.findAll().then(function(users) {
-            return res.status(200).send(users)
-        })
-    })
-
-    api.get('/users/:id', function(req, res, next) {
-        User.findOne({
-            id: req.params.id
-        }).then(function(user) {
-            if (user.idUSER == req.params.id) {
-                return res.status(200).send(user)
+    api.get("/cars", function(req, res, next) {
+        Cars.findAll().then(function(cars) {
+            if (cars.length > 0) {
+                return res.status(200).send(cars)
             } else {
-                return res.status(404).send("User not found")
-            }
-        })
-    })
-
-    api.get('/users/mail/:mail', function(req, res, next) {
-        User.findOne({
-            mail: req.params.mail
-        }).then(function(user) {
-            if (user.mail == req.params.mail) {
-                return res.status(200).send(user)
-            } else {
-                return res.status(404).send("User not found")
+                return res.status(404).send("No cars found")
             }
         })
     })

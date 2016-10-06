@@ -275,11 +275,12 @@ ALTER TABLE Message ADD CONSTRAINT fk_conversation_message FOREIGN KEY (idCONVER
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Voiture`
+-- Table structure for table `Cars`
 --
 
-CREATE TABLE IF NOT EXISTS Voiture (
-  idVOITURE int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS Cars (
+  idCARS int(11) NOT NULL AUTO_INCREMENT,
+  marque varchar(45) NOT NULL,
   modele varchar(45) NOT NULL,
   annee int(4) NOT NULL,
   wheelchairSeat int(1) NOT NULL,
@@ -287,13 +288,40 @@ CREATE TABLE IF NOT EXISTS Voiture (
   ramp varchar(45) NOT NULL,
   image varchar(500) NOT NULL,
   city varchar(45) NOT NULL,
-  departement varchar(45) NOT NULL,
+  county varchar(45) NOT NULL,
   ownerName varchar(45) NOT NULL,
   priceDay int NOT NULL,
   isReserved boolean NOT NULL DEFAULT FALSE,
 
-  PRIMARY KEY (idVOITURE)
+  PRIMARY KEY (idCARS)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+INSERT INTO Cars (marque, modele, annee, wheelchairSeat, seat, ramp, image, city, county, ownerName, priceDay) VALUES
+("Renault", "Trafic", 2004, 1, 6, "électrique", "https://www.wheeliz.com/media/cache/car__car_show__slide/23698/236aee1759a243f874bfd8a184b4a455a14ed8eb.jpeg", "Cugnaux", "31", "Jean-Claude", 44),
+("Renault", "Kangoo", 2003, 1, 4, "électrique", "https://www.wheeliz.com/media/cache/car__car_show__slide/14918/d7b68561d6f4608d599ccdf70fefead9a64fdb3e.jpeg", "Vezins", "49", "Adrien", 52),
+("Renault", "Kangoo", 2003, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/10010/aa66822a9e47f96a41bbf6c2a65b442ae78257bc.jpeg", "Paris", "75", "Charlotte", 37),
+("Renault", "Kangoo", 2013, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/23612/5573626627f5f429f1adbe1d0e4e025239c053a7.jpeg", "Tomblaine", "54", "Bernadette", 58),
+("Fiat", "Scudo", 2010, 1, 6, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/36468/dec7df5381f78fca45fd7eea331a1f0519f9fe3c.png", "Anglet", "64", "Serge", 55),
+("Fiat", "Dobblo", 2005, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/12348/e93965dcecf4b92e58b31a3603d72bf6a55dc4b9.jpeg", "Nanterre", "92", "Thamoures", 99),
+("Renault", "Kangoo", 2008, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/33054/d3db820854bc3f01bebbd99a1f5cc6d80cc82e3a.jpeg", "Montauban", "82", "Camille", 39),
+("Fiat", "Dobblo", 2014, 4, 3, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/11599/e7f8ed182790113ff97e8c67876715c976be5c1f.jpeg", "Molsheim", "67", "Dominique", 52),
+("Renault", "Kangoo", 2007, 1, 4, "électrique", "https://www.wheeliz.com/media/cache/car__car_show__slide/10932/d5ab47e61ee39402b4021ee91c26223db22223cd.jpeg", "Anglet", "64", "Stéphane", 52),
+("Renault", "Kangoo", 2009, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/12187/c3d61341dceefeb1f65e3fde716c57245a6da6a4.jpeg", "Bessenay", "69", "Alain", 52),
+("Ford", "Transit", 2010, 3, 8, "électrique", "https://www.wheeliz.com/media/cache/car__car_show__slide/12000/d9cbba7062dc5becb002c5c426cb0f090fded881.jpeg", "Labège", "31", "Umen", 52),
+("Peugeot", "Expert", 2005, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/22747/24ca65467cb3ae57a8e386e0a48c29b415ca7f22.jpeg", "Bagnolet", "93", "Aminah", 66),
+("Volkswagen", "Caddy", 2016, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/41379/9cafce1ca9708c46d00fda0515194ff07d77b83f.jpeg", "Villejuif", "94", "SARL Gak Location", 99),
+("Opel", "Movano", 2015, 4, 3, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/41379/d14a2e08ccd2675c4cdafe96b7e60250bc860b2b.jpeg", "Villejuif", "94", "SARL Gak Location", 154),
+("Opel", "Vivaro", 2015, 2, 3, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/41379/65e86f1450227b4da83bc98fa1413f41d0eec77c.jpeg", "Villejuif", "94", "SARL Gak Location", 127),
+("Renault", "Express", 1996, 1, 2, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/26237/8b71346212b61361580d6bfebdb9139e1fa686a0.jpeg", "Châtillon", "92", "Mourad", 61),
+("Ford", "Transit", 2008, 3, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/38813/21fc75f12848ea594a37a08c05589e92f35e5ff8.jpeg", "Boulogne-Billancourt", "92", "Gilles", 66),
+("Renault", "Express", 1996, 1, 5, "électrique", "https://www.wheeliz.com/media/cache/car__car_show__slide/41038/87ce9b79f4ff59e956fa8f1e1f326286776ccd4d.jpeg", "Versailles", "78", "Jean-Marie", 77),
+("Renault", "Master", 2011, 3, 8, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/78954/90a5bbb99fb46e409d376cfe22bba37825d81aa5.jpeg", "Roissy-en-France", "95", "Fast & Serious Services", 110),
+("Renault", "Master", 2008, 3, 6, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/95846/b4a452ebfcc7626213345d9ccca5fc5ff07bf525.jpeg", "Saulx-Les-Chartreux", "91", "Joel", 66),
+("Renault", "Master", 2007, 3, 6, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/95846/381a9399a945f2eb31d45a276b47b7ac99d63900.jpeg", "Saulx-Les-Chartreux", "91", "Joel", 66),
+("Citroën", "Berlingot", 2005, 1, 4, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/44082/bb118db0473f3d5ab807b526337e0f80253338f6.jpeg", "Cergy", "95", "Marc", 66),
+("Fiat", "Scudo", 2009, 1, 6, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/93119/a1f660dd913f5a54c78d6f0c003f0153b84a5c56.jpeg", "Plaisir", "78", "Kita", 66),
+("Volkswagen", "Transporter", 2010, 1, 5, "électrique", "https://www.wheeliz.com/media/cache/car__car_show__slide/10218/f4cc123fcaccd11d5c9d8da522d578e640eb63c9.jpeg", "Ballancourt-sur-Essone", "91", "Xavier", 66),
+("Renault", "Master", 2012, 3, 3, "manuelle", "https://www.wheeliz.com/media/cache/car__car_show__slide/48508/ab5c3c6e1e25daa79bb7697cb5a5df40115f4929.png", "Ablis", "78", "Bel Air Automobile", 66)
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------

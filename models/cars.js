@@ -1,12 +1,16 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('voiture', {
-    idVOITURE: {
+  return sequelize.define('cars', {
+    idCARS: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
+    },
+    marque: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     modele: {
       type: DataTypes.STRING,
@@ -36,7 +40,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    departement: {
+    county: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -54,6 +58,6 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '0'
     }
   }, {
-    tableName: 'voiture'
+    tableName: 'cars'
   });
 };
