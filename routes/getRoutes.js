@@ -5,8 +5,6 @@ var ENDPOINT = require('../ENDPOINT.js')
 
 var sequelize
 
-process.env.NODE_ENV = "test"
-
 if (process.env.NODE_ENV === "test") {
     console.log(ENDPOINT.dev)
 
