@@ -13,7 +13,8 @@ if (process.env.NODE_ENV === "test") {
     sequelize = new Sequelize(ENDPOINT.dev, {
     	define: {
     		timestamps: false
-    	}
+    	},
+        logging: false
     });
 } else {
     console.log(ENDPOINT.endpoint)
@@ -56,6 +57,23 @@ module.exports = function(api){
                 })
             } else {
                 return res.status(404).send("No car found for this id. Or maybe is already reserved")
+            }
+        })
+    })
+
+    api.put("/cars/unreserve/:id", function(req, res, next) {
+        Cars.findOne({
+            idCARS: req.params.id,
+            isReserved: true
+        }).then(function(car) {
+            if (car != undefined && car.idCARS == req.params.id) {
+                car.update({
+                    isReserved: false
+                }).then(function() {
+                    return res.status(200).send("Car unreserved !")
+                })
+            } else {
+                return res.status(404).send("No car found for this id. Or maybe not reserved")
             }
         })
     })

@@ -12,11 +12,35 @@ describe('Hello World', function() {
             .send()
             .expect("Hello World")
     })
+})
 
-    /*it('should fail to return Hello World', function() {
+describe("CHALLENGE :", function() {
+    it("/cars - should return list of cars", function() {
         return request(api)
-            .get('/hello')
+            .get('/cars')
             .send()
-            .expect("Hello, World !")
-    })*/
+            .expect(200)
+    })
+
+    it("/cars/reserve/123456 - should return 404 not found error", function() {
+        return request(api)
+            .put('/cars/reserve/123456')
+            .send()
+            .expect(404)
+            .expect("No car found for this id. Or maybe is already reserved")
+    })
+
+    it("/cars/reserve/4 - should update car and return 200 Ok", function() {
+        return request(api)
+            .put('/cars/reserve/4')
+            .send()
+            .expect(200)
+    })
+
+    it("/cars/unreserve/4 - should reupdate car and return 200 Ok", function() {
+        return request(api)
+            .put('/cars/unreserve/4')
+            .send()
+            .expect(200)
+    })
 })
