@@ -6,20 +6,18 @@ var ENDPOINT = require('../ENDPOINT.js')
 var sequelize
 
 if (process.env.NODE_ENV === "test") {
-    console.log(ENDPOINT.dev)
-
     sequelize = new Sequelize(ENDPOINT.dev, {
     	define: {
     		timestamps: false
-    	}
+    	},
+        logging: false
     });
 } else {
-    console.log(ENDPOINT.endpoint)
-
     sequelize = new Sequelize(ENDPOINT.endpoint, {
     	define: {
     		timestamps: false
-    	}
+    	},
+        logging: false
     });
 }
 
@@ -121,4 +119,161 @@ module.exports = function(api){
         })
     })
 
+    // Sport
+    api.get('/sports', function(req, res, next) {
+        Sport.findAll().then(function(sports) {
+            return res.status(200).send(sports)
+        })
+    })
+
+    api.get('/sports/:id', function(req, res, next) {
+        Sport.findOne({
+            where: {
+                idSPORT: req.params.id
+            }
+        }).then(function(sport) {
+            if (sport != undefined && sport.idSPORT == req.params.id) {
+                return res.status(200).send(sport)
+            } else {
+                return res.status(404).send("Sport not found")
+            }
+        })
+    })
+
+    api.get('/sports/name/:name', function(req, res, next) {
+        Sport.findOne({
+            where: {
+                name: req.params.name
+            }
+        }).then(function(sport) {
+            if (sport != undefined && sport.name == req.params.name) {
+                return res.status(200).send(sport)
+            } else {
+                return res.status(404).send("Sport not found")
+            }
+        })
+    })
+
+    // Handicap
+    api.get('/handicaps', function(req, res, next) {
+        Handicap.findAll().then(function(handicaps) {
+            return res.status(200).send(handicaps)
+        })
+    })
+
+    api.get('/handicaps/:id', function(req, res, next) {
+        Handicap.findOne({
+            where: {
+                idHANDICAP: req.params.id
+            }
+        }).then(function(handicap) {
+            if (handicap != undefined && handicap.idHANDICAP == req.params.id) {
+                return res.status(200).send(handicap)
+            } else {
+                return res.status(404).send("Handicap not found")
+            }
+        })
+    })
+
+    api.get('/handicaps/name/:name', function(req, res, next) {
+        Handicap.findOne({
+            where: {
+                name: req.params.name
+            }
+        }).then(function(handicap) {
+            if (handicap != undefined && handicap.name == req.params.name) {
+                return res.status(200).send(handicap)
+            } else {
+                return res.status(404).send("Handicap not found")
+            }
+        })
+    })
+
+    // Liste utilisateurs par sport
+    api.get("/users/by/sport", function(req, res, next) {
+        Has_favorite.findAll().then(function(has_favorites) {
+            if (has_favorites != undefined && has_favorites.length > 0) {
+                return res.status(200).send(has_favorites)
+            } else {
+                return res.status(404).send("No Favorite found")
+            }
+        })
+    })
+
+    // Liste Organisation
+    api.get("/organize/:idUser", function(req, res, next) {
+        User.findOne({
+            where: {
+                idUSER: req.params.idUser
+            }
+        }).then(function(user) {
+            if (user != undefined) {
+                Organize.findAll({
+                    where: {
+                        idUSER: user.idUSER
+                    }
+                }).then(function(organizes) {
+                    if (organizes != undefined && organizes.length > 0) {
+                        return res.status(200).send(organizes)
+                    } else {
+                        return res.status(404).send("No content for this user")
+                    }
+                })
+            } else {
+                return res.status(404).send("User not found")
+            }
+        })
+    })
+
+    // Liste des conversation d'un user
+    api.get("/conversations/:idUser", function(req, res, next) {
+        User.findOne({
+            where: {
+                idUser: req.params.idUser
+            }
+        }).then(function(user){
+            if (user != undefined) {
+                Conversation.findAll({
+                    where: {
+                        idUSERA: user.idUSER
+                    }
+                }).then(function(conversations) {
+                    if (conversations != undefined && conversations.length > 0) {
+                        return res.status(200).send(conversations)
+                    } else {
+                        return res.status(404).send("No conversation for this user")
+                    }
+                })
+            } else {
+                return res.status(404).send("User not found")
+            }
+        })
+    })
+
+    // Liste des messages d'une conversation
+    api.get('/messages/:idUserA/:idUserB', function(req, res, next) {
+        Conversation.findOne({
+            where: {
+                idUSERA: req.params.idUserA,
+                idUSERB: req.params.idUserB
+            }
+        }).then(function(conversation) {
+            if (conversation != undefined) {
+                Message.findAll({
+                    where: {
+                        idCONVERSATIONUSERA: conversation.idUSERA,
+                        idCONVERSATIONUSERB: conversation.idUSERB
+                    }
+                }).then(function(messages) {
+                    if (messages != undefined && messages.length > 0) {
+                        return res.status(200).send(messages)
+                    } else {
+                        return res.status(404).send("No message for this conversation")
+                    }
+                })
+            } else {
+                return res.status(404).send("Conversation Not Found")
+            }
+        })
+    })
 }

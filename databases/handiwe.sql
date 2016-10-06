@@ -127,9 +127,10 @@ CREATE TABLE IF NOT EXISTS Licence (
 CREATE TABLE IF NOT EXISTS Message (
   idMESSAGE int(11) NOT NULL AUTO_INCREMENT,
   message text NOT NULL,
-  sendDate date NOT NULL,
+  sendDate datetime NOT NULL,
   idCONVERSATIONUSERA int(11) NOT NULL,
   idCONVERSATIONUSERB int(11) NOT NULL,
+  FromCreator boolean NOT NULL,
 
   PRIMARY KEY (idMESSAGE)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
@@ -401,4 +402,43 @@ INSERT INTO Sport (name, image) VALUES
 ("Echecs", "http://www.lemauricien.com/sites/default/files/imagecache/400xY/article/2012/08/11/echec_et_mat.jpg"),
 ("Natation", "http://www.ja-drancy.com/wp-content/uploads/2015/04/choix-natation_0.jpg");
 
-INSERT INTO
+INSERT INTO HAS_FAVORITE (idUSER, idFAVORITE) VALUES
+(4, 4),
+(4, 14),
+(14, 4),
+(14, 14);
+
+INSERT INTO CONVERSATION (idUSERA, idUSERB) VALUES
+(4, 14),
+(14, 4);
+
+INSERT INTO Message(message, sendDate, idCONVERSATIONUSERA, idCONVERSATIONUSERB, FromCreator) VALUES
+("Salut !", NOW(), 14, 4, TRUE),
+("Salut ! Comment tu vas ?", NOW(), 14, 4, FALSE),
+("Ça va bien je te remercie !", NOW(), 14, 4, TRUE),
+("Dis-moi ça t'intéresse de venir jouer au Basket Jeudi ?", NOW(), 14, 4, TRUE),
+("Oui, pourquoi pas !", NOW(), 14, 4, FALSE),
+("D'accord ! On se tient au courant !", NOW(), 14, 4, TRUE);
+
+
+INSERT INTO Hour (beginningHour, endHour) VALUES
+(12, 14),
+(18, 20);
+
+INSERT INTO Availability (jour) VALUES
+('Mercredi'),
+('Vendredi'),
+('Samedi');
+
+INSERT INTO HAS_HOURS (idHOUR, idAVAILABILITY) VALUES
+(4, 4),
+(14, 4),
+(4, 14),
+(14, 14),
+(4, 24),
+(14, 24);
+
+INSERT INTO ORGANIZE (idUSER, idSPORT, idAVAILABILITY, zipCode) VALUES
+(14, 4, 4, 75001),
+(14, 4, 14, 75001),
+(14, 4, 24, 75001);
