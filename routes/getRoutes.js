@@ -49,6 +49,7 @@ module.exports = function(api){
         }
     })
 
+    // USER
     api.get('/users', function(req, res, next) {
         User.findAll().then(function(users) {
             return res.status(200).send(users)
@@ -57,9 +58,11 @@ module.exports = function(api){
 
     api.get('/users/:id', function(req, res, next) {
         User.findOne({
-            id: req.params.id
+            where: {
+                idUSER: req.params.id
+            }
         }).then(function(user) {
-            if (user.idUSER == req.params.id) {
+            if (user != undefined && user.idUSER == req.params.id) {
                 return res.status(200).send(user)
             } else {
                 return res.status(404).send("User not found")
@@ -67,15 +70,54 @@ module.exports = function(api){
         })
     })
 
-    api.get('/users/mail/:mail', function(req, res, next) {
+    api.get('/users/mail/:mail/:password', function(req, res, next) {
         User.findOne({
-            mail: req.params.mail
+            where: {
+                mail: req.params.mail,
+                pass_word: req.params.password
+            }
         }).then(function(user) {
-            if (user.mail == req.params.mail) {
+            if (user != undefined && user.mail == req.params.mail && user.pass_word == req.params.password) {
                 return res.status(200).send(user)
             } else {
                 return res.status(404).send("User not found")
             }
         })
     })
+
+    // Place
+    api.get('/places', function(req, res, next) {
+        Place.findAll().then(function(places) {
+            return res.status(200).send(places)
+        })
+    })
+
+    api.get('/places/:id', function(req, res, next) {
+        Place.findOne({
+            where: {
+                idPLACE: req.params.id
+            }
+        }).then(function(place) {
+            if (place != undefined && place.idPLACE == req.params.id) {
+                return res.status(200).send(place)
+            } else {
+                return res.status(404).send("Place not found")
+            }
+        })
+    })
+
+    api.get('/places/name/:name', function(req, res, next) {
+        Place.findOne({
+            where: {
+                name: req.params.name
+            }
+        }).then(function(place) {
+            if (place != undefined && place.name == req.params.name) {
+                return res.status(200).send(place)
+            } else {
+                return res.status(404).send("Place not found")
+            }
+        })
+    })
+
 }

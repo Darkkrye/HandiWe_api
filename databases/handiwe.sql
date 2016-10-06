@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS User (
   zipCode char(5),
   city varchar(45),
   mail varchar(45) NOT NULL,
+  password varchar(45) NOT NULL,
   telephone char(14),
   isProtected boolean,
   image varchar(500),
@@ -333,6 +334,37 @@ INSERT INTO Cars (marque, modele, annee, wheelchairSeat, seat, ramp, image, city
 -- Jeu d'essai
 --
 
-INSERT INTO User(firstName, lastName, birthdayDate, address, addressComplement1, addressComplement2, zipCode, city, mail, telephone, isProtected, image) VALUES
-("Pierre", "BOUDON", '1994-06-07', '101 Route de Dieppe', NULL, NULL, 27140, "Gisors", "pierre.boudon.27@gmail.com", '02.32.32.32.32', TRUE, "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/733784_10200903689818732_815511767_n.jpg?oh=8f5001c777e60d6637ec1363bfe2db85&oe=58A64F54"),
-("User", "TEST", '1980-01-10', '10 Rue de Test', NULL, NULL, 75001, "Paris", "test@test.fr", '02.32.32.32.32', FALSE, "https://success.salesforce.com/resource/1470700800000/sharedlayout/img/new-user-image-default.png")
+INSERT INTO User(firstName, lastName, birthdayDate, address, addressComplement1, addressComplement2, zipCode, city, mail, password, telephone, isProtected, image) VALUES
+("Pierre", "BOUDON", '1994-06-07', '101 Route de Dieppe', NULL, NULL, 27140, "Gisors", "pierre.boudon.27@gmail.com", "passwordPierre" '02.32.32.32.32', TRUE, "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/733784_10200903689818732_815511767_n.jpg?oh=8f5001c777e60d6637ec1363bfe2db85&oe=58A64F54"),
+("User", "TEST", '1980-01-10', '10 Rue de Test', NULL, NULL, 75001, "Paris", "test@test.fr", "passwordTest", '02.32.32.32.32', FALSE, "https://success.salesforce.com/resource/1470700800000/sharedlayout/img/new-user-image-default.png")
+
+INSERT INTO Place (name, mail, type, address, addressComplement1, addressComplement2, zipCode, city, telephone, accountantName, hasMaterial, hasFreeAccess) VALUES
+("1ERE COMPAGNIE D'ARC DE LAGNY", "cie.arc.lagny@free.fr", "Section", "17 RUE CAVALLO PEDUZZI", "NULL", "NULL", 77400, "LAGNY SUR MARNE", "06 15 40 50 07", "DANIEL GRANDE", TRUE, NULL),
+("CLINIQUE MEDICO-CHIRURGICALE", "info@a-bras.org", "Club", "54H BOULEVARD ARISTIDE BRIAND", "NULL", "NULL", 77000, "MELUN", "04 63 22 31 36", "EVELYNE GOURET", NULL, NULL),
+("ASSOCIATION DES SPORTS ET DES LOISIRS DES SOURDS", "president.asls77@gmail.com", "Club", "3 RUE ANDRE LALANDE", "BOITE 1011", "NULL", 91000, "EVRY", "06 42 80 06 86", "LUDOVIC QUAGLIOTTI", NULL, NULL),
+("BOUGE TES MUSCLES", "bouges_tes_muscles@yahoo.fr", "Club", "23 RUE DE LUNIVERSITE", "IEMAPF LES CHEMINS DE TRAVERSE", "NULL", 93160, "NOISY LE GRAND", "01 48 15 06 50", "JOHAN ANQUETIL", NULL, NULL),
+("CAVALIERS DE LA FERME DU BEL-AIR", "karl.crochart@cfb-equitation.org", "Section", "47 GRANDE RUE DU 8 MAI 1945", "NULL", "NULL", 91430, "VAUHALLAN", "01 60 14 33 75", "KARL CROCHART", TRUE, NULL),
+("CENTRE AERONAUTIQUE DE BEYNES", "cab.beynes@cab.asso.fr", "Section", "ROUTE DEPARTEMENTALE 119", "AERODROME DE BEYNES-THIVERVAL", "NULL", 78650, "BEYNES", "01 34 89 10 05", "NULL", TRUE, NULL),
+("ENTENTE ATHLETIQUE DE ST QUENTIN EN YVELINES", "easqy@laposte.net", "Section", "66 RUE SERPENTINE  ", "NULL", "NULL", 78960, "VOISINS LE BRETONNEUX", "06 41 07 16 93", "Map VIGNIER", NULL, NULL),
+("LES MOUSQUETAIRES DU VAL D'EUROPE", "lesmousquetaires@escrime-val-europe.com", "Section", "51 RUE DE PARIS", "NULL", "NULL", 77700, "BAILLY ROMAINVILLIERS", "06 61 38 42 76", "STEPHANE VENIEL", NULL, NULL),
+("FOOTBALL CLUB SAINT-LEU 95", "fcslpb95@orange.fr", "Section", "PLACE MARECHAL FOCH CSL LES DOURDAINS", "NULL", "NULL", 95320, "ST LEU LA FORET", "01 39 95 96 20", "EMMANUEL LOPES", NULL, NULL),
+("OBJECTIF SPORT ET DIFFERENCES", "thierry.descouture@sfr.fr", "Section", "43 RUE DE LA TOURLOURETTE", "NULL", "NULL", 91280, "ST PIERRE DU PERRAY", "06 20 32 63 14", "THIERRY DESCOUTURE", TRUE, NULL),
+("PARIS 13 TENNIS DE TABLE", "handi@paris13tt.org", "Section", "25 AV DE LA PORTE D'IVRY", "SALLE SPECIFIQUE TENNIS DE TABLE CARPENTIER", "NULL", 75013, "PARIS", "09 77 51 57 55 ", "LINH NGUYEN", TRUE, TRUE),
+("RAMBOUILLET HANDISPORT", "blanchet.daniel0262@orange.fr", "Club", "2 RUE CHASLES", "APPARTEMENT 203", "NULL", 78120, "RAMBOUILLET", "01 30 59 12 67", "DANIEL BLANCHET", TRUE, NULL),
+("STADE DE VANVES", "contacts@stadedevanves.com", "Section", "39 RUE JEAN BAPTISTE POTIN", "NULL", "NULL", 92170, "VANVES", "01 46 42 97 45", "BRUNO CHAUVET", NULL, NULL),
+("TAN-GO-IN", " info@tangoin.fr", "Club", "1 RUE D EUPATORIA", "NULL", "NULL", 75020, "PARIS", "06 61 98 49 95", "NULL", NULL, NULL),
+("TENNIS CLUB DES SOURDS DE PARIS", "tennis.asso@orange.fr", "Section", "2426 RUE ST BLAISE", "NULL", "NULL", 75020, "PARIS", "01 48 56 07 21", "NULL", NULL, NULL),
+("UNION SPORTIVE D'IVRY", "infos@usivry.org", "Section", "17 RUE RASPAIL", "NULL", "NULL", 94200, "IVRY SUR SEINE", "01 45 15 07 90", "JEAN-PIERRE FAVIER", NULL, NULL),
+("VELO CLUB TORCY", "vctorcy77@gmail.com", "Section", "18 PLACE DE L APPEL DU 18 JUIN 1940", "MAIRIE DE TORCY", "NULL", 77200, "TORCY", "NULL", "PHILIPPE BONNARD", NULL, NULL),
+("VGA SAINT-MAUR", "secretariat@vga-fr.org", "Section", "8 AVENUE DU NORD", "NULL", "NULL", 94100, "ST MAUR DES FOSSES", "01 48 83 44 24", "DANIEL RAMOS", NULL, NULL),
+("HANDIFOOTSAL A.S.E.", "cqueauhandifootsal@sfr.fr", "Club", "206 RUE PIERRE ET MARIE CURIE", "CHEZ ASE", "NULL", 91000, "EVRY", "06 22 66 59 05", "CATHERINE QUEAU", NULL, NULL),
+("LES CLAYES HANDISPORT", "les.clayes.handisport.secretariat@orange.fr", "Section", "17 AVENUE DE VILLEPREUX", "MAIRIE ANNEXE ARGOS", "NULL", 78340, "LES CLAYES SOUS BOIS", "01 30 47 20 08", "BERNARD DUFEIL", NULL, NULL),
+(" ECOLE HANDISPORT-ADAPTE", "handisport.92@free.fr", "Club", "4 AVENUE PIERRE BROSSOLETTE", "NULL", "NULL", 92350, "LE PLESSIS ROBINSON", "01 46 32 34 34", "NULL", NULL, NULL),
+("VERSAILLES HANDI SPORT ADAPTE", "laurent.lecom@wanadoo.fr", "Club", "8 ALLEE HECTOR BERLIOZ", "NULL", "CHEZ LAURENT LE COM", 78000, "VERSAILLES", "01 30 21 52 77", "LAURENT LE COM", NULL, NULL),
+("VILLEMOMBLE SPORTS ESCRIME", "contact@vsescrime.net", "Section", "106 126 RUE DE NEUILLY", "NULL", "NULL", 93250, "VILLEMOMBLE", "06 07 09 91 66", "LUC BRULIARD", TRUE, FALSE),
+("VINCENNES PLONGEE PASSION", "contact@vpp94.fr", "Section", "AVENUE DES MURS-DU-PARC", "NULL", "NULL", 94300, "VINCENNES", "06 83 22 75 11", "PIERRE-YVES GAGNY", TRUE, FALSE),
+("VOILE DECOUVERTE HANDICAP", "vdh.assoc@gmail.com", "Club", "5 ALLEE DES MYOSOTIS", "NULL", "NULL", 93200, "ST DENIS", "06 70 54 09 00", "NULL", NULL, NULL);
+
+
+INSERT INTO Sport (name, image) VALUES
+(, ),
