@@ -267,6 +267,34 @@ ALTER TABLE CONVERSATION ADD CONSTRAINT fk_user_conversation FOREIGN KEY (idUSER
 
 ALTER TABLE Message ADD CONSTRAINT fk_conversation_message FOREIGN KEY (idCONVERSATIONUSERA, idCONVERSATIONUSERB) REFERENCES CONVERSATION(idUSERA, idUSERB);
 
+
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+-- -----------------------CHALLENGE------------------------
+-- --------------------------------------------------------
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Voiture`
+--
+
+CREATE TABLE IF NOT EXISTS Voiture (
+  idVOITURE int(11) NOT NULL AUTO_INCREMENT,
+  modele varchar(45) NOT NULL,
+  annee int(4) NOT NULL,
+  wheelchairSeat int(1) NOT NULL,
+  seat int(1) NOT NULL,
+  ramp varchar(45) NOT NULL,
+  image varchar(500) NOT NULL,
+  city varchar(45) NOT NULL,
+  departement varchar(45) NOT NULL,
+  ownerName varchar(45) NOT NULL,
+  priceDay int NOT NULL,
+  isReserved boolean NOT NULL DEFAULT FALSE,
+
+  PRIMARY KEY (idVOITURE)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- --------------------------------------------------------
