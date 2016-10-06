@@ -12,4 +12,11 @@ describe('Hello World', function() {
             .send()
             .expect("Hello World")
     })
+
+    it('should fail to return Hello World', function() {
+        return request(api)
+            .get('/hello')
+            .send()
+            .expect("Hello, World !")
+    })
 })
