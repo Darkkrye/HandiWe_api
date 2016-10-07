@@ -353,7 +353,8 @@ INSERT INTO Cars (marque, modele, annee, wheelchairSeat, seat, ramp, image, city
 
 INSERT INTO User (firstName, lastName, birthdayDate, address, addressComplement1, addressComplement2, zipCode, city, mail, pass_word, telephone, isProtected, image) VALUES
 ("Pierre", "BOUDON", '1994-06-07', '101 Route de Dieppe', NULL, NULL, 27140, "Gisors", "pierre.boudon.27@gmail.com", "passwordPierre", '02.32.32.32.32', TRUE, "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/733784_10200903689818732_815511767_n.jpg?oh=8f5001c777e60d6637ec1363bfe2db85&oe=58A64F54"),
-("User", "TEST", '1980-01-10', '10 Rue de Test', NULL, NULL, 75001, "Paris", "test@test.fr", "passwordTest", '02.32.32.32.32', FALSE, "https://success.salesforce.com/resource/1470700800000/sharedlayout/img/new-user-image-default.png");
+("User", "TEST", '1980-01-10', '10 Rue de Test', NULL, NULL, 75001, "Paris", "test@test.fr", "passwordTest", '02.32.32.32.32', FALSE, "https://success.salesforce.com/resource/1470700800000/sharedlayout/img/new-user-image-default.png"),
+("Nico", "K", '1993-03-26', "Rue de Paris", NULL, NULL, 75001, "Paris", "nicoK@nico.fr", "passwordNico", '02.32.32.32.32', FALSE, "https://success.salesforce.com/resource/1470700800000/sharedlayout/img/new-user-image-default.png");
 
 INSERT INTO Place (name, mail, type, address, addressComplement1, addressComplement2, zipCode, city, telephone, accountantName, hasMaterial, hasFreeAccess) VALUES
 ("1ERE COMPAGNIE D'ARC DE LAGNY", "cie.arc.lagny@free.fr", "Section", "17 RUE CAVALLO PEDUZZI", "NULL", "NULL", 77400, "LAGNY SUR MARNE", "06 15 40 50 07", "DANIEL GRANDE", TRUE, NULL),
@@ -410,7 +411,8 @@ INSERT INTO HAS_FAVORITE (idUSER, idFAVORITE) VALUES
 
 INSERT INTO CONVERSATION (idUSERA, idUSERB) VALUES
 (4, 14),
-(14, 4);
+(14, 4),
+(14, 24);
 
 INSERT INTO Message(message, sendDate, idCONVERSATIONUSERA, idCONVERSATIONUSERB, FromCreator) VALUES
 ("Salut !", NOW(), 14, 4, TRUE),
