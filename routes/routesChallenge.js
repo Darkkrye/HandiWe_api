@@ -44,8 +44,10 @@ module.exports = function(api){
 
     api.put("/cars/reserve/:id", function(req, res, next) {
         Cars.findOne({
-            idCARS: req.params.id,
-            isReserved: false
+            where: {
+                idCARS: req.params.id,
+                isReserved: false
+            }
         }).then(function(car) {
             if (car != undefined && car.idCARS == req.params.id) {
                 car.update({
@@ -61,8 +63,10 @@ module.exports = function(api){
 
     api.put("/cars/unreserve/:id", function(req, res, next) {
         Cars.findOne({
-            idCARS: req.params.id,
-            isReserved: true
+            where :{
+                idCARS: req.params.id,
+                isReserved: true
+            }
         }).then(function(car) {
             if (car != undefined && car.idCARS == req.params.id) {
                 car.update({
